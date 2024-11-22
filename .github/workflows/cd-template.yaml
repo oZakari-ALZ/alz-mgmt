@@ -59,12 +59,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Get Bicep Variables
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-variables@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-variables@main
         with:
           parameters_file_name: ${{ env.PARAMETERS_FILE_NAME }}
 
       - name: Get On Demand Folder infra-as-code
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-on-demand-folder@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-on-demand-folder@main
         with:
           repository: "https://github.com/Azure/ALZ-Bicep"
           releaseArtifactName: "accelerator.zip"
@@ -74,7 +74,7 @@ jobs:
 
 
       - name: Install Bicep and Update Az Module
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-installer@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-installer@main
 
       - name: OIDC Login to Tenant
         uses: azure/login@v2
@@ -86,13 +86,13 @@ jobs:
 
       - name: First Deployment Check
         id: firstDeploymentCheck
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-first-deployment-check@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-first-deployment-check@main
         if: ${{ !inputs.destroy }}
         with:
           managementGroupId: ${{ env.MANAGEMENT_GROUP_ID }}
 
       - name: 'What If: Management Groups Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.management_groups && !inputs.destroy }}
         with:
           displayName: 'Management Groups Deployment'
@@ -107,7 +107,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Logging and Sentinel Resource Group Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.logging_and_sentinel_resource_group && !inputs.destroy }}
         with:
           displayName: 'Logging and Sentinel Resource Group Deployment'
@@ -122,7 +122,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Logging and Sentinel Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.logging_and_sentinel && !inputs.destroy }}
         with:
           displayName: 'Logging and Sentinel Deployment'
@@ -137,7 +137,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Custom Policy Definitions Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.custom_policy_definitions && !inputs.destroy }}
         with:
           displayName: 'Custom Policy Definitions Deployment'
@@ -152,7 +152,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Custom Role Definitions Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.custom_role_definitions && !inputs.destroy }}
         with:
           displayName: 'Custom Role Definitions Deployment'
@@ -167,7 +167,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Custom Management Group Diagnostic Settings'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.management_group_diagnostic_settings && !inputs.destroy }}
         with:
           displayName: 'Custom Management Group Diagnostic Settings'
@@ -182,7 +182,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Built-in and Custom Policy Assignments Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.policy_assignments && !inputs.destroy }}
         with:
           displayName: 'Built-in and Custom Policy Assignments Deployment'
@@ -197,7 +197,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Deploy Subscription Placement'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.subscription_placement && !inputs.destroy }}
         with:
           displayName: 'Deploy Subscription Placement'
@@ -212,7 +212,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Connectivity Resource Group Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.connectivity_resource_group && !inputs.destroy }}
         with:
           displayName: 'Connectivity Resource Group Deployment'
@@ -227,7 +227,7 @@ jobs:
           firstDeployment: '${{ env.firstDeployment }}'
           whatIfEnabled: 'true'
       - name: 'What If: Hub (Hub-and-Spoke) Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.hub_and_spoke && !inputs.destroy }}
         with:
           displayName: 'Hub (Hub-and-Spoke) Deployment'
@@ -243,7 +243,7 @@ jobs:
           whatIfEnabled: 'true'
 
       - name: Run Bicep Destroy What If
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-destroy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-destroy@main
         if: ${{ inputs.destroy }}
         with:
           whatIfEnabled: 'true'
@@ -267,12 +267,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Get Bicep Variables
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-variables@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-variables@main
         with:
           parameters_file_name: ${{ env.PARAMETERS_FILE_NAME }}
 
       - name: Get On Demand Folder infra-as-code
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-on-demand-folder@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-on-demand-folder@main
         with:
           repository: "https://github.com/Azure/ALZ-Bicep"
           releaseArtifactName: "accelerator.zip"
@@ -282,7 +282,7 @@ jobs:
 
 
       - name: Install Bicep and Update Az Module
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-installer@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-installer@main
 
       - name: OIDC Login to Tenant
         uses: azure/login@v2
@@ -293,7 +293,7 @@ jobs:
           enable-AzPSSession: true
 
       - name: 'Deploy: Management Groups Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.management_groups && !inputs.destroy }}
         with:
           displayName: 'Management Groups Deployment'
@@ -307,7 +307,7 @@ jobs:
           firstRunWhatIf: 'true'
           whatIfEnabled: 'false'
       - name: 'Deploy: Logging and Sentinel Resource Group Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.logging_and_sentinel_resource_group && !inputs.destroy }}
         with:
           displayName: 'Logging and Sentinel Resource Group Deployment'
@@ -321,7 +321,7 @@ jobs:
           firstRunWhatIf: 'true'
           whatIfEnabled: 'false'
       - name: 'Deploy: Logging and Sentinel Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.logging_and_sentinel && !inputs.destroy }}
         with:
           displayName: 'Logging and Sentinel Deployment'
@@ -335,7 +335,7 @@ jobs:
           firstRunWhatIf: 'false'
           whatIfEnabled: 'false'
       - name: 'Deploy: Custom Policy Definitions Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.custom_policy_definitions && !inputs.destroy }}
         with:
           displayName: 'Custom Policy Definitions Deployment'
@@ -349,7 +349,7 @@ jobs:
           firstRunWhatIf: 'false'
           whatIfEnabled: 'false'
       - name: 'Deploy: Custom Role Definitions Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.custom_role_definitions && !inputs.destroy }}
         with:
           displayName: 'Custom Role Definitions Deployment'
@@ -363,7 +363,7 @@ jobs:
           firstRunWhatIf: 'false'
           whatIfEnabled: 'false'
       - name: 'Deploy: Custom Management Group Diagnostic Settings'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.management_group_diagnostic_settings && !inputs.destroy }}
         with:
           displayName: 'Custom Management Group Diagnostic Settings'
@@ -377,7 +377,7 @@ jobs:
           firstRunWhatIf: 'false'
           whatIfEnabled: 'false'
       - name: 'Deploy: Built-in and Custom Policy Assignments Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.policy_assignments && !inputs.destroy }}
         with:
           displayName: 'Built-in and Custom Policy Assignments Deployment'
@@ -391,7 +391,7 @@ jobs:
           firstRunWhatIf: 'false'
           whatIfEnabled: 'false'
       - name: 'Deploy: Deploy Subscription Placement'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.subscription_placement && !inputs.destroy }}
         with:
           displayName: 'Deploy Subscription Placement'
@@ -405,7 +405,7 @@ jobs:
           firstRunWhatIf: 'false'
           whatIfEnabled: 'false'
       - name: 'Deploy: Connectivity Resource Group Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.connectivity_resource_group && !inputs.destroy }}
         with:
           displayName: 'Connectivity Resource Group Deployment'
@@ -419,7 +419,7 @@ jobs:
           firstRunWhatIf: 'true'
           whatIfEnabled: 'false'
       - name: 'Deploy: Hub (Hub-and-Spoke) Deployment'
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-deploy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-deploy@main
         if: ${{ inputs.hub_and_spoke && !inputs.destroy }}
         with:
           displayName: 'Hub (Hub-and-Spoke) Deployment'
@@ -434,7 +434,7 @@ jobs:
           whatIfEnabled: 'false'
 
       - name: Run Bicep Destroy
-        uses: oZakari-ALZ/alz-mgmt-templates/.github/actions/bicep-destroy@main
+        uses: oZakari-ALZ/alz-mgmt/.github/actions/bicep-destroy@main
         if: ${{ inputs.destroy }}
         with:
           whatIfEnabled: 'false'
